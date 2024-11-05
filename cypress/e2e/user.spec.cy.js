@@ -13,8 +13,9 @@ describe('Orange HRM Tests', () => {
     firstNameField: "[name='firstName']",
     LastNameField: "[name='lastName']",
     genericField: ".oxd-input--active",
-    dateFiel: "[placeholder='yyyy-dd-mm']",
-    dateCloseButton: ".--close",
+    genericComboBox: ".oxd-select-text",
+    dateField: "[placeholder='yyyy-dd-mm']",
+    dateCloseButton:".--close",
     submitButton: "[type='submit']"
   }
   
@@ -34,8 +35,19 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorsList.genericField).eq(6).clear().type('2025-03-10')
     cy.get(selectorsList.dateCloseButton).click()
     cy.get(selectorsList.submitButton).eq(0).click()
-    cy.get('body').should('contain','Successfully Update')
+    cy.get('body').should('contain', 'Successfully Update')
     cy.get('.oxd-toast-close')
+    cy.get(selectorsList.genericComboBox).eq(0).click()
+    cy.get('.oxd-select-dropdown > :nth-child(4)').click()
+    cy.get(selectorsList.genericComboBox).eq(1).click()
+    cy.get('.oxd-select-dropdown > :nth-child(3)').click()
+    cy.get(selectorsList.genericField).eq(8).clear().type('1988-18-12')
+    cy.get(selectorsList.dateCloseButton).click()
+    cy.get('.oxd-radio-wrapper').eq(1).click()
+    cy.get(selectorsList.submitButton).eq(1).click()
+    cy.get('body').should('contain', 'Successfully Saved')
+
+
   
   
   })
